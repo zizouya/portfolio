@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veille Technologique - Zaïneb El ARCHI</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Zaïneb <span>El ARCHI</span> SIO SISR</a>
+  <button class="menu-btn" aria-label="Menu">☰</button>
+  <nav class="navbar">
+    <a href="index.html">Accueil</a>
+    <a href="projets.html">Épreuve E5</a>
+    <a href="epreuves.html">Épreuve E6</a>
+    <a href="entreprise.html">Entreprise</a>
+    <a href="veille.html">Veille Technologique</a>
+    <a class="nav-icon" href="https://www.linkedin.com/in/zaineb-el-archi" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+    <a class="nav-icon" href="mailto:zainebelarchi@outlook.fr" aria-label="Email">@</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="heading">Veille <span>Technologique</span></h1>
+
+  <div class="box wide">
+    <h2 class="box-title" style="text-align:left">Ma démarche de veille</h2>
+    <p>Je suis régulièrement les innovations, vulnérabilités et bonnes pratiques de mon domaine pour rester opérationnelle et anticiper les menaces.</p>
+    <p><strong>Ma problématique :</strong> comment sécuriser une infrastructure de type PME face aux ransomwares, et comment l'IA transforme-t-elle le support et la supervision réseau ?</p>
+    <h3 class="sub" style="border:none;margin:1rem 0 .6rem;padding:0">Méthode et outils</h3>
+    <ul>
+      <li><strong>Push :</strong> flux RSS via <a class="link" href="https://feedly.com" target="_blank" rel="noopener">Feedly</a> et alertes <a class="link" href="https://www.google.fr/alerts" target="_blank" rel="noopener">Google Alerts</a> sur « Active Directory ransomware », « AIOps réseau » et « GLPI IA ».</li>
+      <li><strong>Pull :</strong> lecture hebdomadaire du <a class="link" href="https://cert.ssi.gouv.fr" target="_blank" rel="noopener">CERT-FR</a> et des publications de l'<a class="link" href="https://cyber.gouv.fr" target="_blank" rel="noopener">ANSSI</a>, avec une synthèse mensuelle réutilisée en E5 et E6.</li>
+    </ul>
+  </div>
+
+  <div class="box wide">
+    <h2 class="box-title" style="text-align:left">Sujet 1 : Sécuriser Active Directory face aux ransomwares</h2>
+    <p><strong>Pourquoi ce thème ?</strong> Active Directory est la cible privilégiée des ransomwares : compromettre le domaine permet de chiffrer tout le système d'information.</p>
+    <div class="cards">
+      <article class="card">
+        <div class="card-visual">🌳</div>
+        <div class="card-body">
+          <div class="tags"><span>Sécurité</span></div>
+          <h3>Points de contrôle Active Directory</h3>
+          <div class="meta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> CERT-FR (ANSSI) · juin 2020</div>
+          <p>Recueil de points de contrôle pour évaluer la sécurité d'un annuaire Active Directory, cible prioritaire des attaquants. L'annuaire est noté de 1 (problèmes critiques) à 5 (état de l'art).</p>
+          <a class="btn" href="https://cert.cyber.gouv.fr/dur/CERTFR-2020-DUR-001/" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-visual">🔑</div>
+        <div class="card-body">
+          <div class="tags"><span>Authentification</span></div>
+          <h3>Classe de vulnérabilités en environnement Active Directory</h3>
+          <div class="meta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> CERT-FR (ANSSI) · octobre 2021</div>
+          <p>Le relais d'authentification NTLM permet d'élever ses privilèges dans un annuaire. Le CERT-FR conseille de bloquer le NTLM sortant des systèmes sensibles et de privilégier Kerberos, après une phase d'audit.</p>
+          <a class="btn" href="https://cert.cyber.gouv.fr/dur/CERTFR-2021-DUR-001/" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-visual">🖥️</div>
+        <div class="card-body">
+          <div class="tags"><span>Virtualisation</span></div>
+          <h3>VMware ESXi ciblé par des attaques par ransomware</h3>
+          <div class="meta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> Global Security Mag · février 2023</div>
+          <p>Une campagne de rançongiciel exploite d'anciennes failles d'ESXi. De nombreux serveurs restent exposés sur Internet : mettre à jour et isoler les interfaces d'administration est essentiel.</p>
+          <a class="btn" href="https://www.globalsecuritymag.fr/VMware-ESXi-cible-par-des-attaques-par-ransomware-proposition-expert-cyber.html" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="box wide">
+    <h2 class="box-title" style="text-align:left">Sujet 2 : L'intelligence artificielle au service du réseau et du support</h2>
+    <p><strong>Pourquoi ce thème ?</strong> L'intelligence artificielle automatise le traitement des tickets et la détection des pannes, deux tâches centrales du technicien SISR.</p>
+    <div class="cards">
+      <article class="card">
+        <div class="card-visual">🎧</div>
+        <div class="card-body">
+          <div class="tags"><span>Support</span></div>
+          <h3>Plugin GLPI AI : l'IA dans le helpdesk</h3>
+          <div class="meta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> GLPI Project</div>
+          <p>Le plugin GLPIAI ajoute à GLPI le résumé automatique des tickets, des suivis suggérés et la traduction, pour faire gagner du temps aux techniciens.</p>
+          <a class="btn" href="https://www.glpi-project.org/fr/integration/plugin-glpiai/" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-visual">📡</div>
+        <div class="card-body">
+          <div class="tags"><span>Supervision</span></div>
+          <h3>EasyVista rachète Coservit et sa plateforme ServiceNav</h3>
+          <div class="meta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> Distributique · octobre 2021</div>
+          <p>EasyVista rachète Coservit pour intégrer la plateforme de monitoring ServiceNav et ses capacités de supervision prédictive à son offre de gestion des services IT.</p>
+          <a class="btn" href="https://www.distributique.com/actualites/lire-easyvista-rachete-coservit-et-sa-plateforme-servicenav-31712.html" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-visual">🤖</div>
+        <div class="card-body">
+          <div class="tags"><span>AIOps</span></div>
+          <h3>Qu'est-ce que l'AIOps ?</h3>
+          <div class="meta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> IBM</div>
+          <p>L'AIOps applique l'intelligence artificielle aux opérations informatiques : elle agrège les données, filtre le bruit, identifie les causes racines et automatise les remédiations.</p>
+          <a class="btn" href="https://www.ibm.com/think/topics/aiops" target="_blank" rel="noopener">Source <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="box wide">
+    <h2 class="box-title" style="text-align:left">Bilan et perspectives</h2>
+    <p>Cette veille a nourri mes projets : durcissement d'Active Directory et segmentation pfSense (E6), GLPI et supervision (E5), ainsi que les bonnes pratiques appliquées en entreprise.</p>
+    <p><strong>Et après ?</strong> Approfondir le Zero Trust, tester GLPI AI en laboratoire et poursuivre la revue hebdomadaire du CERT-FR.</p>
+  </div>
+</main>
+
+
+<footer>
+  <p>© Zaïneb El ARCHI - Portfolio BTS SIO SISR</p>
+  <p>2026 Tous droits réservés.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

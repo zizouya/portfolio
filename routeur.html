@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Routeur NAT Debian - Zaïneb El ARCHI</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Zaïneb <span>El ARCHI</span> SIO SISR</a>
+  <button class="menu-btn" aria-label="Menu">☰</button>
+  <nav class="navbar">
+    <a href="index.html">Accueil</a>
+    <a href="projets.html">Épreuve E5</a>
+    <a href="epreuves.html">Épreuve E6</a>
+    <a href="entreprise.html">Entreprise</a>
+    <a href="veille.html">Veille Technologique</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="heading">Routeur <span>NAT</span> sous Debian</h1>
+  <p class="intro">Un serveur Debian 10 équipé de deux cartes réseau a été transformé en routeur NAT : il relie le réseau local 172.20.0.0/24 à Internet.</p>
+  <h2 class="sub">Objectif</h2>
+  <div class="box">
+    <p>Les machines d'un réseau privé ont des adresses IP qui ne sont pas utilisables sur Internet. Un routeur NAT résout ce problème : il fait passer le trafic d'un réseau à l'autre et remplace l'adresse privée de chaque machine par sa propre adresse côté Internet. Les machines du réseau local peuvent ainsi sortir sur Internet à travers un seul point d'accès.</p>
+  </div>
+  <h2 class="sub">Montage</h2>
+  <div class="box">
+    <p>La machine s'appelle « routeur » et fonctionne sous Debian 10. Elle possède deux cartes réseau :</p>
+    <div class="table-wrap"><table><thead><tr><th>Carte</th><th>Rôle</th><th>Configuration</th></tr></thead><tbody><tr><td>Interface 1 (ens33)</td><td>Côté Internet</td><td>Mode NAT de VMware</td></tr><tr><td>Interface 2</td><td>Côté réseau local</td><td>Segment 172.20.0.0/24, adresse du routeur 172.20.0.1</td></tr></tbody></table></div>
+  </div>
+  <h2 class="sub">Étapes de mise en place</h2>
+  <div class="box">
+    <ol>
+      <li><strong>Configurer les deux cartes réseau</strong> comme indiqué ci-dessus.</li>
+      <li><strong>Activer le routage</strong> (« IP forwarding ») : un réglage du système autorise le serveur à faire passer les paquets d'un réseau à l'autre. Sans lui, la machine reçoit le trafic mais ne le transmet pas.</li>
+      <li><strong>Recharger la configuration</strong> pour que ce réglage soit pris en compte immédiatement.</li>
+      <li><strong>Activer le NAT</strong> : une règle du pare-feu Linux (iptables) remplace l'adresse source des paquets qui sortent par la carte côté Internet. La règle est ensuite affichée pour vérifier qu'elle est bien en place.</li>
+      <li><strong>Rendre le NAT persistant</strong> : le paquet iptables-persistent enregistre la règle pour qu'elle soit rechargée à chaque redémarrage.</li>
+    </ol>
+  </div>
+  <h2 class="sub">Tests et bonus</h2>
+  <div class="box">
+    <p>Trois tests valident le montage :</p>
+    <ul>
+      <li>Un ping vers 8.8.8.8 (serveurs de Google) vérifie l'accès à Internet par adresse IP.</li>
+      <li>Après ajout de suffixes DNS sur un poste Windows, un ping vers un nom comme free.fr vérifie aussi la résolution de noms.</li>
+      <li>Après un redémarrage du routeur, on contrôle que le routage est toujours activé (valeur ip_forward à 1).</li>
+    </ul>
+    <p><strong>Bonus : rediriger certains flux vers un serveur du réseau.</strong> Pour les clients qui arrivent de l'extérieur par l'interface côté Internet :</p>
+    <div class="table-wrap"><table><thead><tr><th>Port</th><th>Service</th><th>Redirigé vers</th></tr></thead><tbody><tr><td>443</td><td>Web sécurisé (HTTPS)</td><td>Serveur web 192.168.7.11</td></tr><tr><td>25</td><td>Messagerie (SMTP)</td><td>Serveur Exchange Edge 192.168.7.13</td></tr></tbody></table></div>
+    <p>Une fois les tests validés, la configuration est de nouveau enregistrée avec iptables-persistent. Les règles IPv4 et IPv6 sont conservées dans le dossier /etc/iptables.</p>
+  </div>
+
+  <a href="projets.html" class="btn secondary" style="margin:2rem auto;display:table">← Retour à l'épreuve E5</a>
+</main>
+
+<footer>
+  <p>© Zaïneb El ARCHI - Portfolio BTS SIO SISR</p>
+  <p>2026 Tous droits réservés.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

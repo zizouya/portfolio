@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OCS Inventory - Zaïneb El ARCHI</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Zaïneb <span>El ARCHI</span> SIO SISR</a>
+  <button class="menu-btn" aria-label="Menu">☰</button>
+  <nav class="navbar">
+    <a href="index.html">Accueil</a>
+    <a href="projets.html">Épreuve E5</a>
+    <a href="epreuves.html">Épreuve E6</a>
+    <a href="entreprise.html">Entreprise</a>
+    <a href="veille.html">Veille Technologique</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="heading">OCS <span>Inventory</span></h1>
+  <p class="intro">OCS Inventory a été installé sur un serveur Linux pour recenser automatiquement les ordinateurs et appareils du parc (Linux, Windows, Android) dans une interface web.</p>
+  <h2 class="sub">Objectif</h2>
+  <div class="box">
+    <p>Un parc informatique mélange des matériels, des systèmes (Linux, Windows, macOS) et des logiciels en versions différentes. OCS Inventory remonte automatiquement ces informations vers un point central. L'administrateur peut ainsi répondre aux questions du quotidien : quelles versions de Windows sont installées, quels postes ont un disque presque plein, où se trouve tel matériel.</p>
+    <p>OCS fonctionne en mode client/serveur, avec quatre éléments :</p>
+    <ul>
+      <li><strong>Les agents</strong> sont installés sur chaque machine (Windows, Linux, macOS, Android) et envoient ses informations au serveur.</li>
+      <li><strong>Le serveur de communication</strong> reçoit, classe et archive ces informations.</li>
+      <li><strong>Le serveur d'administration</strong> est l'interface web qui permet de consulter les inventaires et de gérer les droits des utilisateurs.</li>
+      <li><strong>Le serveur de déploiement</strong> permet de diffuser logiciels et mises à jour depuis un point central.</li>
+    </ul>
+    <p>Ce type d'outil s'inscrit dans les bonnes pratiques ITIL, le référentiel utilisé par les directions des systèmes d'information.</p>
+  </div>
+  <h2 class="sub">Environnement</h2>
+  <div class="box">
+    <div class="table-wrap"><table><thead><tr><th>Élément</th><th>Choix retenu</th></tr></thead><tbody><tr><td>Serveur</td><td>Machine Linux nommée « ocs »</td></tr><tr><td>Pile web</td><td>LAMP : Linux, Apache (serveur web), MariaDB (base de données), PHP</td></tr><tr><td>Version d'OCS</td><td>Serveur pour Linux 2.11.1</td></tr><tr><td>Base de données</td><td>Base « dbocs » avec un utilisateur dédié</td></tr><tr><td>Accès</td><td>Par l'adresse IP, puis par le nom ocs.sitka.local</td></tr><tr><td>Agents testés</td><td>Linux, Windows (agent 2.9.0.0) et Android</td></tr></tbody></table></div>
+  </div>
+  <h2 class="sub">Étapes de mise en place</h2>
+  <div class="box">
+    <ol>
+      <li><strong>Préparer la machine</strong> : mise à jour du système et renommage en « ocs ».</li>
+      <li><strong>Installer le serveur LAMP</strong> : Apache, MariaDB et PHP. Un test depuis un navigateur confirme que le serveur web répond. Un avertissement sur le nom de domaine est corrigé avec un petit fichier de configuration.</li>
+      <li><strong>Sécuriser la base de données</strong> : l'assistant de sécurité de MariaDB définit le mot de passe administrateur, supprime les utilisateurs anonymes, interdit la connexion distante du compte root et supprime la base de test.</li>
+      <li><strong>Créer la base d'OCS</strong> : une base dédiée et un utilisateur qui n'a de droits que sur elle. Des requêtes de vérification confirment que tout est bien créé.</li>
+      <li><strong>Installer les dépendances</strong> : les modules Perl et PHP dont OCS a besoin pour fonctionner.</li>
+      <li><strong>Installer OCS</strong> : téléchargement de l'archive du serveur, puis lancement du script d'installation en gardant les valeurs proposées par défaut.</li>
+      <li><strong>Relier OCS à la base</strong> : le nom de la base et celui de l'utilisateur sont renseignés dans les fichiers de configuration d'OCS.</li>
+      <li><strong>Activer la configuration Apache</strong> : les trois fichiers d'OCS (serveur, API REST, interface de rapports) sont activés, puis Apache est redémarré.</li>
+      <li><strong>Terminer l'installation par l'interface web</strong> : saisie des informations de la base, mise à jour proposée par OCS, puis connexion avec le compte par défaut. Une alerte de sécurité demande de renommer le fichier d'installation. Une fois fait, l'alerte disparaît.</li>
+      <li><strong>Accéder par un nom de domaine</strong> : un enregistrement « ocs » est créé sur le serveur DNS et un hôte virtuel est ajouté dans Apache, pour joindre le serveur avec ocs.sitka.local.</li>
+      <li><strong>Déployer les agents</strong> : sous Linux, installation de l'agent en choisissant la méthode http et l'adresse du serveur OCS. Sous Windows, téléchargement de l'agent puis saisie de l'adresse du serveur (pas de proxy), et l'inventaire est lancé depuis l'icône OCS. Sous Android, installation de l'agent mobile et envoi de l'inventaire : le serveur reçoit pour cela une deuxième carte réseau en mode bridge, afin que le smartphone puisse l'atteindre.</li>
+    </ol>
+  </div>
+  <h2 class="sub">Résultat et vérification</h2>
+  <div class="box">
+    <p>Après l'envoi de leur inventaire, les machines Linux, Windows et Android apparaissent dans la liste de l'interface web d'OCS. La vérification se fait en consultant cette liste des machines remontées.</p>
+  </div>
+
+  <a href="projets.html" class="btn secondary" style="margin:2rem auto;display:table">← Retour à l'épreuve E5</a>
+</main>
+
+<footer>
+  <p>© Zaïneb El ARCHI - Portfolio BTS SIO SISR</p>
+  <p>2026 Tous droits réservés.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

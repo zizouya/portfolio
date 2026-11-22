@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pare-feu pfSense - Zaïneb El ARCHI</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Zaïneb <span>El ARCHI</span> SIO SISR</a>
+  <button class="menu-btn" aria-label="Menu">☰</button>
+  <nav class="navbar">
+    <a href="index.html">Accueil</a>
+    <a href="projets.html">Épreuve E5</a>
+    <a href="epreuves.html">Épreuve E6</a>
+    <a href="entreprise.html">Entreprise</a>
+    <a href="veille.html">Veille Technologique</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="heading">Pare-feu <span>pfSense</span></h1>
+  <p class="intro">pfSense, un pare-feu open source, a été installé dans une machine virtuelle VMware pour séparer et protéger trois réseaux : Internet (WAN), le réseau interne (LAN) et un réseau annexe (OPT1).</p>
+  <h2 class="sub">Objectif</h2>
+  <div class="box">
+    <p>pfSense est un pare-feu open source basé sur le système FreeBSD. Il filtre le trafic avec un pare-feu à états (Packet Filter) et assure aussi le routage et le NAT, ce qui lui permet de relier plusieurs réseaux. C'est l'équivalent libre des routeurs professionnels propriétaires, adapté à la sécurisation d'un réseau d'entreprise.</p>
+    <div class="table-wrap"><table><thead><tr><th>Ressource</th><th>Minimum</th><th>Recommandé</th></tr></thead><tbody><tr><td>Processeur</td><td>600 MHz</td><td>1 GHz</td></tr><tr><td>Mémoire vive</td><td>512 Mo</td><td>1 Go</td></tr><tr><td>Stockage</td><td>Plus de 6 Go</td><td>-</td></tr></tbody></table></div>
+  </div>
+  <h2 class="sub">Infrastructure du laboratoire</h2>
+  <div class="box">
+    <p>Le laboratoire utilise trois machines, réparties sur trois réseaux :</p>
+    <div class="table-wrap"><table><thead><tr><th>Machine</th><th>Réseau</th><th>Paramètres</th></tr></thead><tbody><tr><td>pfSense (nommé heimdall)</td><td>WAN</td><td>Adresse en DHCP/NAT à l'origine</td></tr><tr><td>Serveur Active Directory et DNS (hermes)</td><td>sitka_lan</td><td>172.20.0.14/24, passerelle 172.20.0.250, domaine sitka.local</td></tr><tr><td>Machine Debian ou Ubuntu et machine Windows</td><td>opt_lan</td><td>Adresse en DHCP</td></tr></tbody></table></div>
+    <p>La machine virtuelle pfSense reçoit trois cartes réseau, une par réseau :</p>
+    <div class="table-wrap"><table><thead><tr><th>Carte</th><th>Réseau VMware</th><th>Réseau</th></tr></thead><tbody><tr><td>Carte 1</td><td>Bridge</td><td>192.168.1.0/24 (WAN)</td></tr><tr><td>Carte 2</td><td>Lan_1</td><td>172.20.0.0/24 (LAN)</td></tr><tr><td>Carte 3</td><td>Lan_2</td><td>192.168.2.0/24 (OPT1)</td></tr></tbody></table></div>
+  </div>
+  <h2 class="sub">Installation</h2>
+  <div class="box">
+    <ol>
+      <li><strong>Télécharger pfSense</strong> : l'image ISO de pfSense CE 2.6.0 est récupérée sur le site officiel.</li>
+      <li><strong>Vérifier l'intégrité du fichier</strong> : on calcule l'empreinte SHA256 du fichier téléchargé et on la compare à celle publiée. Si les deux sont identiques, le fichier n'a pas été altéré.</li>
+      <li><strong>Créer la machine virtuelle</strong> dans VMware : l'ISO est décompressée puis sélectionnée, la machine se nomme pfsense, avec un disque de 20 Go (valeur par défaut), 1 Go de mémoire et les trois cartes réseau.</li>
+      <li><strong>Lancer l'installation</strong>, puis redémarrer pour arriver au menu de pfSense.</li>
+    </ol>
+    <p>Deux constats après le redémarrage :</p>
+    <ul>
+      <li>Seules deux interfaces sont reconnues à ce stade (em0 et em1).</li>
+      <li>Le clavier est en qwerty malgré le choix du français pendant l'installation. Le passage au français depuis le shell (option 8 du menu) ne dure que jusqu'au prochain redémarrage. Le réglage définitif se fait ensuite depuis l'interface web.</li>
+    </ul>
+  </div>
+  <h2 class="sub">Configuration des interfaces</h2>
+  <div class="box">
+    <p>La configuration se fait depuis le menu de pfSense en deux temps.</p>
+    <ol>
+      <li><strong>Déclarer les interfaces</strong> (option 1 du menu) : on désigne laquelle sert de WAN, de LAN et d'OPT1.</li>
+      <li><strong>Attribuer les adresses IP</strong> (option 2 du menu) :</li>
+    </ol>
+    <div class="table-wrap"><table><thead><tr><th>Interface</th><th>Adresse</th><th>Masque</th><th>Passerelle</th><th>DHCP IPv4</th><th>Interface web de gestion</th></tr></thead><tbody><tr><td>WAN</td><td>192.168.1.250</td><td>255.255.255.0</td><td>192.168.1.1</td><td>Non</td><td>Non, par sécurité</td></tr><tr><td>LAN</td><td>172.20.0.250</td><td>255.255.255.0</td><td>Aucune</td><td>Oui, de 172.20.0.20 à 172.20.0.30</td><td>Oui</td></tr><tr><td>OPT1</td><td>192.168.2.250</td><td>255.255.255.0</td><td>Aucune</td><td>Non</td><td>-</td></tr></tbody></table></div>
+    <p>L'IPv6 est désactivé sur les trois interfaces.</p>
+    <p>Pour le WAN, les adresses dépendent de la box Internet. Une commande ipconfig /all sur la machine physique donne le réseau (192.168.1.0/24) ainsi que la passerelle et le DNS (192.168.1.1).</p>
+  </div>
+
+  <a href="projets.html" class="btn secondary" style="margin:2rem auto;display:table">← Retour à l'épreuve E5</a>
+</main>
+
+<footer>
+  <p>© Zaïneb El ARCHI - Portfolio BTS SIO SISR</p>
+  <p>2026 Tous droits réservés.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
